@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch((error) => console.error('Service Worker Registration Failed:', error));
+        }
+    </script>
+</head>
+<body>
+    <div id="login-screen" class="container">
+        <h1>Login</h1>
+        <input type="email" id="login-email" placeholder="Email">
+        <div class="password-container">
+            <input type="password" id="login-password" placeholder="Password">
+            <button type="button" onclick="togglePasswordVisibility('login-password', this)">👁️</button>
+        </div>
+        <button onclick="login()">Sign In</button>
+        <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+    </div>
+
+    <div id="signup-screen" class="container" style="display: none;">
+        <h1>Sign Up</h1>
+        <input type="email" id="signup-email" placeholder="Email">
+        <div class="password-container">
+            <input type="password" id="signup-password" placeholder="Password">
+            <button type="button" onclick="togglePasswordVisibility('signup-password', this)">👁️</button>
+        </div>
+        <div class="password-container">
+            <input type="password" id="signup-confirm-password" placeholder="Confirm Password">
+            <button type="button" onclick="togglePasswordVisibility('signup-confirm-password', this)">👁️</button>
+        </div>
+        <button onclick="signUp()">Sign Up</button>
+        <p>Have an account already? <a href="#" onclick="showLogin()">Sign In</a></p>
+    </div>
+
+    <div id="welcome-screen" class="container" style="display: none;">
+        <h1>Welcome!</h1>
+        <button onclick="logout()">Log Out</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
